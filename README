@@ -1,0 +1,178 @@
+To generate package.json:
+-------------------------
+npm init -y
+
+To install mongo dependencies:
+----------------------------
+npm i mongodb
+
+To execute commands on mongo from this project:
+-----------------------------------------------
+node mongodb.js
+
+To install nodemon as a dev dependency in our project:
+------------------------------------------------------
+npm i nodemon --save-dev
+
+To run on dev environment:
+--------------------------
+npm run dev
+
+To install express:
+-------------------
+npm i express
+
+HTTP statuses:
+--------------
+httpstatuses.com
+
+Testing endpoints using Postman:
+--------------------------------
+1.-create a folder
+2.-create a new task defining if it's GET, POST, etc
+3.-define route (i.e. localhost:3000/users)
+4.-go to body, raw option, and then create a JSON with an example of data you want to test:
+---> i.e.
+{
+	"name": "Bernardo Llamas",
+	"email": "bernardo.llamas@gmail.com",
+	"password": "JAJAJAJA"
+}
+5.-test: push Send button to see if it works.
+
+** important: don`t forget to export your module: "module.exports = Task;"
+** important: don`t forget to import your module in index.js: "const Task = require('./models/task');"
+
+NOTES ABOUT MONGO:
+------------------
+
+To find one user (findOne function) with an specific _id we cannot use _id value, we must use ObjectID like following:
+---------------------------------------------------------------------------------------------------------------------
+db.collection('users').findOne({ _id: new ObjectID('5db9b965f49e174539a0ecf1') }, (error, user) => {
+        if(error) {
+            return console.log('Unable to fecth');
+        }
+
+        console.log(user);
+    });
+
+To use find function we need to convert into an array:
+------------------------------------------------------
+db.collection('tasks').findOne({ _id: new ObjectID('5db86cd5347f615fa51fb448')}, (error, task) => {
+       if(error) {
+           return console.log('Unable to fetch');
+       }
+
+       console.log(task);
+    });
+
+To update a certain register in mongodb using _id, for example:  (( $set method ))
+---------------------------------------------------------------
+const updatePromise = db.collection('users').updateOne({
+       _id: new ObjectID('5db86917a5eeb25b1a4231e0')
+    }, {
+        $set: {
+            name: 'Bornuardo'
+        }
+    });
+
+    updatePromise.then((result) => {
+       console.log(result);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+    reduced version:
+    ----------------
+
+db.collection('users').updateOne({
+       _id: new ObjectID('5db86917a5eeb25b1a4231e0')
+    }, {
+        $set: {
+            name: 'Bornuardo'
+        }
+    }).then((result) => {
+       console.log(result);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+
+To increment/reduce the value of a field (if is numeric)----> $inc:
+--------------------------------------------------------
+
+db.collection('users').updateOne({
+       _id: new ObjectID('5db86917a5eeb25b1a4231e0')
+    }, {
+        $inc: {
+            age: 1
+        }
+    }).then((result) => {
+       console.log(result);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+To update many registers: updateMany
+-------------------------
+db.collection('tasks').updateMany({
+       completed: false
+    }, {
+        $set: {
+            completed: true
+        }
+    }).then((result) => {
+        console.log(result.modifiedCount);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+
+To delete many registers using condition:
+----------------------------------------
+db.collection('users').deleteMany({
+       age: 31
+    }).then((result) => {
+        console.log(result);
+    }).catch((error) => {
+        console.log(error);
+    });
+
+LOGIN:
+------
+We use bcryptjs to encrypt passwords through this command:
+- npm i bcryptjs
+
+To encrypt a password we use bcrypt.hash(password, 8); where number 8 is salt length.
+   const password = 'Red12345!';
+   const hashedPassword = await bcrypt.hash(password, 8);
+
+To get to know if a password is correct comparing to what is stored on our DB we use "compare":
+   const isMatch = await bcrypt.compare('Red12345!', hashedPassword);
+   console.log(isMatch);
+
+Authentication token:
+---------------------
+We use jsonwebtoken package through this command:
+- npm i jsonwebtoken
+
+Uploading images:
+-----------------
+Express doesnt allow to upload images; for this reason 'multer' npm package is needed to be installed.
+- npm i multer
+
+Images format: sharp package helps to unify images format
+--------------
+- npm i sharp
+
+Sending emails from our app:
+----------------------------
+- Make an account in sendgrid.com.
+- Choose to integrate sendgrid API to our project and create a key.
+- key: 'SG.00r-nvymQ42TXJZDi0PZQg.ZBCSJ75Or8dOGKYkomVc23_SzEtubCl96ed......'
+- Install sendgrid package for node: npm i @sendgrid/mail
+
+Setting Environment Variables:
+------------------------------
+- to set env variables we must use the following package: env-cmd:
+  npm i env-cmd --save-dev ((--save -dev to set it on devDependencies in package.json))
