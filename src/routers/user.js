@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 const {sendWelcomeEmail, sendCancelationEmail} = require('../emails/account');
 const User = require('../models/user');
 
-router.post('/users', auth, async (req, res) => {
+router.post('/users', /*auth,*/ async (req, res) => {
     const user = new User(req.body);
 
     try {
