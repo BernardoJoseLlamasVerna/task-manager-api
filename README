@@ -176,3 +176,44 @@ Setting Environment Variables:
 ------------------------------
 - to set env variables we must use the following package: env-cmd:
   npm i env-cmd --save-dev ((--save -dev to set it on devDependencies in package.json))
+
+TESTS ON JS PROJECT
+-------------------
+To make tests on a JS project we use JestJS ((https://jestjs.io/))
+- to instal Jest locally as a dev dependency we use the following command:
+-- npm i jest --save-dev
+
+In package.json we include test in scripts
+"scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
+    "test": "jest"
+  },
+
+We must create a folder to store our tests and a file, i.e. tests/math.test.js:
+
+test('Hello world', () => {
+
+});
+
+test('This should fail', () => {
+    throw new Error('Failure!!');
+});
+
+To run tests we use the following command:
+- npm test
+
+--->first function: OK
+--->second function: KO (error)
+
+
+(( uploaded to heroku:
+after push all our changes to our github, to store them on heroku we do:
+- create the project on heroku: heroku create bernardo-task-manager
+create configuration variables:
+- heroku config:set JWT_SECRET=123456789 SENDGRID_API_KEY=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
+- heroku config:set MONGODB_URL='mongodb+srv://taskapp:BERNARDO26@cluster0-jkptx.mongodb.net/task-manager-api?retryWrites=true&w=majority'
+- heroku config
+- git push heroku master
+
+))
