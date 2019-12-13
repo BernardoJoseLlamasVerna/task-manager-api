@@ -211,9 +211,10 @@ To run tests we use the following command:
 after push all our changes to our github, to store them on heroku we do:
 - create the project on heroku: heroku create bernardo-task-manager
 create configuration variables:
-- heroku config:set JWT_SECRET=123456789 SENDGRID_API_KEY=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
-- heroku config:set MONGODB_URL='mongodb+srv://taskapp:BERNARDO26@cluster0-jkptx.mongodb.net/task-manager-api?retryWrites=true&w=majority'
+- heroku config:set JWT_SECRET=123... SENDGRID_API_KEY=SG.00r-.....
+- heroku config:set MONGODB_URL='mongodb+srv://<user>:<password>@cluster0-jkptx.mongodb.net/<database-name>?retryWrites....'
 - heroku config
 - git push heroku master
 
+- our url project: https://bernardo-task-manager (.herokuapp.com)
 ))
