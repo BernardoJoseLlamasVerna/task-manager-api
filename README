@@ -211,7 +211,7 @@ To run tests we use the following command:
 after push all our changes to our github, to store them on heroku we do:
 - create the project on heroku: heroku create bernardo-task-manager
 create configuration variables:
-- heroku config:set JWT_SECRET=123... SENDGRID_API_KEY=SG.00r-.....
+- heroku config:set JWT_SECRET=123... SENDEMAIL_API_KEY='...00r-.....'
 - heroku config:set MONGODB_URL='mongodb+srv://<user>:<password>@cluster0-jkptx.mongodb.net/<database-name>?retryWrites....'
 - heroku config
 - git push heroku master
