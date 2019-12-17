@@ -218,3 +218,10 @@ create configuration variables:
 
 - our url project: https://bernardo-task-manager (.herokuapp.com)
 ))
+
+Supertest:
+---------
+- its a package that allows us to test our app without need a server
+- to install it on dev environment:
+ ** npm i supertest --save -dev
+
